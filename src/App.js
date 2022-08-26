@@ -1,45 +1,12 @@
-import {
-  interaction,layer,custom,control,
-  Interactions,Overlays,Controls,
-  Map,Layers,Overlay,Util
-}from "react-openlayers";
-
-
-import React, { useState } from 'react';
+import React from 'react';
+import MyMap from "./MyMap";
 
 
 function App() {
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
 
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
-    } else {
-      setStatus('Locating...');
-      navigator.geolocation.getCurrentPosition((position) => {
-        setStatus(null);
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-      }, () => {
-        setStatus('Unable to retrieve your location');
-      });
-    }
-  }
-  
   return (
     <div className="App">
-      <Map view={{center:[0,0],zoom:2}}>
-        <Layers>
-          <layer.Tile></layer.Tile>
-        </Layers>
-      </Map>
-      <button onClick={getLocation}>Get Location</button>
-      <h1>Coordinates</h1>
-  <p>{status}</p>
-  {lat && <p>Latitude: {lat}</p>}
-  {lng && <p>Longitude: {lng}</p>}
+        <MyMap />
     </div>
   );
 }
